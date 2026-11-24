@@ -1,4 +1,6 @@
-/* ===== RESET & VARIABEL ===== */
+/* =====================================================
+   RESET & VARIABEL
+   ===================================================== */
 :root {
     --primary: #0066cc;
     --primary-light: #00aaff;
@@ -6,32 +8,46 @@
     --text-dark: #1e293b;
     --text-light: #64748b;
     --white: #ffffff;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --radius: 0.75rem;
     --transition: all 0.3s ease;
+
+    /* Fluid typography dengan clamp() */
+    --fs-h1: clamp(1.75rem, 4vw + 1rem, 3rem);
+    --fs-h2: clamp(1.4rem, 2.5vw + 0.8rem, 2rem);
+    --fs-body: clamp(0.95rem, 1vw + 0.7rem, 1.05rem);
+    --fs-small: clamp(0.8rem, 0.5vw + 0.7rem, 0.9rem);
 }
 
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
-body { 
-    font-family: 'Poppins', sans-serif; 
+body {
+    font-family: 'Poppins', sans-serif;
     color: var(--text-dark);
     background-color: var(--bg-color);
     line-height: 1.6;
+    font-size: var(--fs-body);
     overflow-x: hidden;
 }
 
-/* ===== ANIMASI FADE IN ===== */
+/* =====================================================
+   ANIMASI (dengan prefers-reduced-motion)
+   ===================================================== */
 .fade-in {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(1.25rem);
     animation: fadeInUp 0.8s ease forwards;
 }
 
@@ -42,91 +58,116 @@ body {
     }
 }
 
-/* ===== HEADER / HERO ===== */
+@media (prefers-reduced-motion: reduce) {
+    .fade-in {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    html { scroll-behavior: auto; }
+}
+
+/* =====================================================
+   HERO / HEADER
+   ===================================================== */
 .hero {
     background: linear-gradient(135deg, #0f172a 0%, var(--primary) 100%);
     color: var(--white);
-    padding: 80px 20px 60px;
+    padding: 3rem 1rem 2.5rem;
     text-align: center;
-    position: relative;
 }
 
 .hero-content {
-    max-width: 800px;
+    max-width: 50rem;
     margin: 0 auto;
 }
 
 .foto {
-    width: 150px;
-    height: 150px;
+    width: clamp(6rem, 18vw, 9.5rem);
+    height: clamp(6rem, 18vw, 9.5rem);
     border-radius: 50%;
-    border: 5px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    border: 0.3rem solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.3);
     object-fit: cover;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     transition: var(--transition);
 }
 
-.foto:hover {
-    transform: scale(1.05);
-    border-color: var(--white);
+/* Efek hover HANYA untuk perangkat dengan pointer presisi */
+@media (hover: hover) and (pointer: fine) {
+    .foto:hover {
+        transform: scale(1.05);
+        border-color: var(--white);
+    }
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: var(--fs-h1);
     font-weight: 700;
-    margin-bottom: 5px;
-    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.05rem;
+    line-height: 1.2;
 }
 
 .subtitle {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 1.2vw + 0.6rem, 1.15rem);
     font-weight: 300;
     opacity: 0.9;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 .social-links {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 0.75rem;
 }
 
-.social-links a {
+.social-links .btn {
     color: var(--white);
     text-decoration: none;
-    font-size: 0.9rem;
-    padding: 8px 16px;
+    font-size: var(--fs-small);
+    padding: 0.5rem 1rem;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 20px;
+    border-radius: 1.25rem;
     transition: var(--transition);
+    min-height: 2.75rem; /* touch target aksesibel */
+    display: inline-flex;
+    align-items: center;
 }
 
-.social-links a:hover {
+.social-links .btn:hover,
+.social-links .btn:focus-visible {
     background: var(--white);
     color: var(--primary);
+    outline: none;
 }
 
-/* ===== NAVBAR STICKY ===== */
+/* =====================================================
+   NAVBAR STICKY
+   ===================================================== */
 .sticky-nav {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     justify-content: center;
-    gap: 30px;
-    padding: 15px;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: var(--shadow-sm);
+    flex-wrap: wrap;
 }
 
 .sticky-nav a {
     color: var(--text-dark);
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: var(--fs-small);
     position: relative;
+    padding: 0.35rem 0.25rem;
     transition: var(--transition);
 }
 
@@ -135,35 +176,39 @@ h1 {
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -5px;
+    bottom: 0;
     left: 0;
     background-color: var(--primary);
     transition: var(--transition);
 }
 
-.sticky-nav a:hover {
-    color: var(--primary);
+@media (hover: hover) {
+    .sticky-nav a:hover {
+        color: var(--primary);
+    }
+    .sticky-nav a:hover::after {
+        width: 100%;
+    }
 }
 
-.sticky-nav a:hover::after {
-    width: 100%;
+/* =====================================================
+   MAIN CONTENT
+   ===================================================== */
+main {
+    max-width: 62.5rem;
+    margin: 2.5rem auto;
+    padding: 0 1rem;
 }
 
-/* ===== MAIN CONTENT ===== */
-main { 
-    max-width: 1000px; 
-    margin: 40px auto; 
-    padding: 0 20px; 
-}
-
-section { 
-    margin-bottom: 60px; 
+section {
+    margin-bottom: 3.5rem;
 }
 
 h2 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
+    font-size: var(--fs-h2);
+    margin-bottom: 1.25rem;
     color: var(--text-dark);
+    line-height: 1.3;
 }
 
 .highlight {
@@ -175,166 +220,206 @@ h2 {
 .highlight::after {
     content: '';
     position: absolute;
-    bottom: 5px;
+    bottom: 0.25rem;
     left: 0;
     width: 100%;
-    height: 8px;
+    height: 0.5rem;
     background-color: rgba(0, 102, 204, 0.15);
     z-index: -1;
-    border-radius: 4px;
+    border-radius: 0.25rem;
 }
 
 .desc {
     color: var(--text-light);
-    font-size: 1.05rem;
-    max-width: 800px;
+    font-size: var(--fs-body);
+    max-width: 50rem;
 }
 
-/* ===== CARDS (KEAHLIAN) ===== */
+/* =====================================================
+   CARDS (KEAHLIAN) — CSS GRID auto-fit
+   ===================================================== */
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.25rem;
 }
 
 .card {
     background: var(--white);
-    padding: 25px 20px;
-    border-radius: 12px;
+    padding: 1.5rem 1.25rem;
+    border-radius: var(--radius);
     text-align: center;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-sm);
     transition: var(--transition);
-    border: 1px solid rgba(0,0,0,0.03);
+    border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0, 102, 204, 0.1);
-    border-color: rgba(0, 102, 204, 0.2);
+@media (hover: hover) {
+    .card:hover {
+        transform: translateY(-0.5rem);
+        box-shadow: 0 0.9rem 2.2rem rgba(0, 102, 204, 0.1);
+        border-color: rgba(0, 102, 204, 0.2);
+    }
 }
 
 .card .icon {
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    margin-bottom: 0.6rem;
 }
 
 .card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
+    font-size: clamp(1rem, 1vw + 0.7rem, 1.15rem);
+    margin-bottom: 0.5rem;
     color: var(--text-dark);
 }
 
 .card p {
-    font-size: 0.85rem;
+    font-size: var(--fs-small);
     color: var(--text-light);
 }
 
-/* ===== KONTAK ===== */
+/* =====================================================
+   KONTAK
+   ===================================================== */
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.25rem;
 }
 
 .contact-item {
     background: var(--white);
-    padding: 20px;
-    border-radius: 12px;
+    padding: 1.25rem;
+    border-radius: var(--radius);
     display: flex;
     align-items: center;
-    gap: 15px;
-    box-shadow: var(--shadow);
+    gap: 1rem;
+    box-shadow: var(--shadow-sm);
     transition: var(--transition);
+    overflow-wrap: anywhere;
 }
 
-.contact-item:hover {
-    transform: translateY(-3px);
+@media (hover: hover) {
+    .contact-item:hover {
+        transform: translateY(-0.2rem);
+    }
 }
 
 .contact-icon {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     background: rgba(0, 102, 204, 0.1);
-    padding: 10px;
-    border-radius: 10px;
+    padding: 0.6rem;
+    border-radius: 0.6rem;
+    flex-shrink: 0;
 }
 
 .contact-item h4 {
-    font-size: 0.9rem;
+    font-size: var(--fs-small);
     color: var(--text-light);
-    margin-bottom: 2px;
+    margin-bottom: 0.15rem;
 }
 
 .contact-item a {
     color: var(--primary);
     text-decoration: none;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 0.8vw + 0.7rem, 1rem);
     transition: var(--transition);
+    overflow-wrap: anywhere;
 }
 
-.contact-item a:hover {
-    color: var(--primary-light);
-    text-decoration: underline;
+@media (hover: hover) {
+    .contact-item a:hover {
+        color: var(--primary-light);
+        text-decoration: underline;
+    }
 }
 
-/* ===== FOOTER ===== */
+/* =====================================================
+   FOOTER
+   ===================================================== */
 footer {
     background: #0f172a;
     color: var(--text-light);
     text-align: center;
-    padding: 30px 20px;
-    margin-top: 60px;
-    font-size: 0.9rem;
+    padding: 1.9rem 1rem;
+    margin-top: 3.5rem;
+    font-size: var(--fs-small);
 }
 
-/* ===== MEDIA QUERIES (RESPONSIVE) ===== */
-/* Mobile kecil (default) */
-/* Tablet: 2 kolom untuk cards */
-@media (min-width: 768px) {
-    .cards {
-        grid-template-columns: repeat(2, 1fr);
+/* =====================================================
+   MEDIA QUERIES — MOBILE FIRST
+   ===================================================== */
+
+/* Tablet ≥ 768px */
+@media (min-width: 48em) {
+    .hero {
+        padding: 4.5rem 1.5rem 3.5rem;
     }
-    .sticky-nav { 
-        justify-content: flex-start; 
-        padding-left: 40px; 
+    .sticky-nav {
+        justify-content: flex-start;
+        padding-left: 2.5rem;
+        gap: 2rem;
     }
-    h1 {
-        font-size: 3rem;
+    main {
+        padding: 0 2rem;
+    }
+    section {
+        margin-bottom: 4rem;
     }
 }
 
-/* Desktop: 4 kolom untuk cards */
-@media (min-width: 1024px) {
+/* Desktop ≥ 1024px */
+@media (min-width: 64em) {
+    main {
+        padding: 0 2.5rem;
+    }
+    .hero {
+        padding: 6rem 2rem 5rem;
+    }
     .cards {
         grid-template-columns: repeat(4, 1fr);
     }
-    main {
-        padding: 0 40px;
-    }
-    .hero {
-        padding: 100px 20px 80px;
-    }
 }
 
-/* Mobile kecil: sesuaikan padding */
-@media (max-width: 480px) {
-    .hero { 
-        padding: 50px 16px 40px; 
-    }
-    h1 { 
-        font-size: 1.8rem; 
-    }
-    .sticky-nav { 
-        gap: 15px; 
-        font-size: 0.85rem; 
-    }
-    .foto { 
-        width: 110px; 
-        height: 110px; 
+/* Layar sangat kecil ≤ 360px */
+@media (max-width: 22.5em) {
+    .sticky-nav {
+        gap: 0.5rem;
+        font-size: 0.75rem;
     }
     .social-links {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
+    }
+}
+
+/* Mode lanskap di ponsel (tinggi ≤ 500px) */
+@media (max-height: 31.25em) and (orientation: landscape) {
+    .hero {
+        padding: 1.5rem 1rem;
+    }
+    .foto {
+        width: 4rem;
+        height: 4rem;
+    }
+}
+
+/* Print */
+@media print {
+    .sticky-nav,
+    .social-links,
+    footer {
+        display: none;
+    }
+    body {
+        background: #fff;
+        color: #000;
+    }
+    .card,
+    .contact-item {
+        box-shadow: none;
+        border: 1px solid #ccc;
     }
 }
