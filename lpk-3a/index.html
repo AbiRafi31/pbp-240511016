@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Halaman profil pribadi Abi Rafi - Mahasiswa Teknik Informatika UMC">
+    <title>Profil Interaktif - Abi Rafi</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Menghubungkan ke CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header / Hero -->
+    <header class="hero">
+        <div class="hero-content fade-in">
+            <img src="assets/foto.jpg" alt="Foto Profil Abi Rafi" class="foto" loading="lazy">
+            <h1>Abi Rafi</h1>
+            <p class="subtitle">Mahasiswa Teknik Informatika UMC</p>
+            <div class="social-links">
+                <a href="mailto:abi88879@gmail.com" class="btn">Email</a>
+                <a href="https://github.com/AbiRafi31" target="_blank" rel="noopener" class="btn">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navbar Sticky & Tombol Tema -->
+    <nav class="sticky-nav" aria-label="Navigasi utama">
+        <div class="nav-links">
+            <a href="#tentang">Tentang</a>
+            <a href="#keahlian">Keahlian</a>
+            <a href="#kontak">Kontak</a>
+        </div>
+        <button id="theme-toggle" class="theme-btn" aria-label="Ubah Tema">🌙 Mode Gelap</button>
+    </nav>
+
+    <main>
+        <!-- Section Tentang & Jam Digital -->
+        <section id="tentang" class="fade-in">
+            <h2><span class="highlight">Tentang</span> Saya</h2>
+            <p class="desc">
+                Saya adalah mahasiswa semester 5 yang memiliki ketertarikan besar pada pengembangan
+                aplikasi multi-platform. Saya senang membangun solusi digital yang tidak hanya berfungsi
+                dengan baik, tetapi juga memberikan pengalaman pengguna yang luar biasa.
+            </p>
+            <div class="digital-clock" id="clock">Memuat jam...</div>
+        </section>
+
+        <!-- Section Keahlian -->
+        <section id="keahlian" class="fade-in">
+            <h2><span class="highlight">Keahlian</span> Saya</h2>
+            <div class="cards">
+                <article class="card">
+                    <div class="icon" aria-hidden="true">🌐</div>
+                    <h3>HTML & CSS</h3>
+                    <p>Membangun layout web modern dan responsif.</p>
+                </article>
+                <article class="card">
+                    <div class="icon" aria-hidden="true">⚡</div>
+                    <h3>JavaScript</h3>
+                    <p>Logika interaktif dan manipulasi DOM.</p>
+                </article>
+                <article class="card">
+                    <div class="icon" aria-hidden="true">☕</div>
+                    <h3>Java</h3>
+                    <p>Aplikasi desktop dengan JavaFX.</p>
+                </article>
+                <article class="card">
+                    <div class="icon" aria-hidden="true">📱</div>
+                    <h3>Kotlin</h3>
+                    <p>Pengembangan aplikasi Android modern.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Section Kontak & Form -->
+        <section id="kontak" class="fade-in">
+            <h2><span class="highlight">Kontak</span> Saya</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <span class="contact-icon" aria-hidden="true">📧</span>
+                    <div>
+                        <h4>Email</h4>
+                        <a href="mailto:abi88879@gmail.com">abi88879@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon" aria-hidden="true">💻</span>
+                    <div>
+                        <h4>GitHub</h4>
+                        <a href="https://github.com/AbiRafi31" target="_blank" rel="noopener">@AbiRafi31</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Interaktif (Tugas Pertemuan 4) -->
+            <div class="form-container">
+                <h3>Kirim Pesan Cepat</h3>
+                <form id="contact-form">
+                    <input type="text" id="nama" placeholder="Nama kamu..." required>
+                    <textarea id="pesan" placeholder="Tulis pesan..." rows="3" required></textarea>
+                    <button type="submit" class="btn-submit">Kirim Pesan</button>
+                </form>
+                <p id="form-feedback" class="feedback"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Abi Rafi. Dibuat dengan ❤️ untuk UMC.</p>
+    </footer>
+
+    <!-- Menghubungkan ke JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
